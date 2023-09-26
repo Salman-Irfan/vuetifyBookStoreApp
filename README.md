@@ -1,69 +1,33 @@
-# base
+Book Store Project Break Down: - 
+Day 1: - User Registration and Login: - 
+    a. UI                   (30 minutes) 
+    b. API Integrations     (1.5 hrs)
 
-## Project setup
+2. Book Catalog and Search: - 
+    a. UI a. title, author, description, price, image, search bar   (45 minutes ) 
+    b. API Integrations                                             (1.5 hrs)
 
-```
-# yarn
-yarn
+3. Product Pages: - 
+    a. UI 
+        I. Separate page for each product details   (45 minutes) 
+        II. API Integrations                        (1.5 hrs)
 
-# npm
-npm install
+Day 2: - 
+1. Shopping Cart: - 
+    a. UI                   (1 hr) 
+    b. API Integrations     (1.5 hrs) 
+2. Admin Dashboard: - 
+    a. UI                   (3 hrs) 
+    b. API Integrations     (3 hrs)
 
-# pnpm
-pnpm install
+Day 3: - 
+    1. Customer Reviews and Ratings: - 
+        a. UI                   (30 minutes) 
+        b. API Integrations     (1.5 hrs)
 
-# pnpm
-bun install
-```
-
-### Compiles and hot-reloads for development
-
-```
-# yarn
-yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
-```
-
-### Compiles and minifies for production
-
-```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
-bun run build
-```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-
-# bun
-bun run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
+2. User Profile Management: - 
+    a. UI 
+    i. Manage profiles, view order history, track shipments, update contact     (1 hrs) 
+    ii. API Integrations                                                        (2 hrs) 
+    3. Responsive Design: -                                                     ( 2 – 3 hrs ) 
+    4. Social Media Integration                                                 (30 minutes)
