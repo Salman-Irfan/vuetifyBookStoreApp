@@ -1,10 +1,13 @@
 <template>
     <v-app>
         <v-app-bar app color="black">
-            <v-toolbar-title>
-                <v-icon>mdi-library</v-icon>
-                LiteraryVue
-            </v-toolbar-title>
+            <router-link to="/" class="yellow-link">
+                <v-toolbar-title>
+                    <v-icon color="yellow">mdi-library</v-icon>
+                    <span class="yellow-text">LiteraryVue</span>
+                </v-toolbar-title>
+            </router-link>
+
 
             <!-- search bar -->
             <v-spacer></v-spacer>
@@ -40,8 +43,13 @@ export default {
     name: 'NavBar', // Enclosed in quotes
     data() {
         return {
-            drawer: false, // Controls the navigation drawer
         };
     },
 };
 </script>
+
+<style scoped>
+.yellow-text {
+    color: yellow !important;
+}
+</style>
