@@ -13,10 +13,10 @@
                             <!-- Form starts -->
                             <v-form @submit.prevent="login" ref="form" lazy-validation>
                                 <!-- Email -->
-                                <v-text-field v-model="email" label="Email" :rules="emailRules" required
+                                <v-text-field variant="outlined" v-model="email" label="Email" :rules="emailRules" required
                                     style="color: yellow;"></v-text-field>
                                 <!-- Password -->
-                                <v-text-field v-model="password" label="Password" :rules="passwordRules" required
+                                <v-text-field variant="outlined" v-model="password" label="Password" :rules="passwordRules" required
                                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                     :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword"
                                     style="color: yellow;"></v-text-field>

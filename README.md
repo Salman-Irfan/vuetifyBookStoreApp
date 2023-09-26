@@ -1,3 +1,7 @@
+Today's Progress
+Lgin, SIgnup UI
+Products displayed with dummy.json fake api
+
 Book Store Project Break Down: - 
 Day 1: - User Registration and Login: - 
     a. UI                   (30 minutes) 

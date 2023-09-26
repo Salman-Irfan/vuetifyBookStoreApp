@@ -2,6 +2,21 @@
   <v-app>
     <v-main>
       <v-container>
+        <!-- Search Input Field and Button -->
+        <v-row>
+          <v-col cols="12" class="mb-4">
+            <v-row align="center">
+              <v-col cols="10">
+                <!-- search input field -->
+                <v-text-field variant="outlined"  label="Search..."></v-text-field>
+              </v-col>
+              <v-col cols="2">
+                <!-- search button -->
+                <v-btn color="primary">Search</v-btn>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
         <v-row>
           <v-col v-for="(product, index) in products.products" :key="index" md="3" sm="6">
             <v-card class="cardHeight">
@@ -35,10 +50,12 @@ export default {
   data() {
     return {
       products: [],
+
     };
   },
+  // integrate get all products api
   async created() {
-        this.products = await GetAllProducts.getAllProducts()
+    this.products = await GetAllProducts.getAllProducts()
   },
 };
 </script>
@@ -48,9 +65,10 @@ export default {
   height: 600px;
 }
 
-.cardText{
+.cardText {
   padding: 0px 10px;
 }
+
 .image {
   height: 70%;
   box-shadow: 5px 5px 5px black;

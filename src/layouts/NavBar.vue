@@ -7,14 +7,7 @@
                     <span class="yellow-text">LiteraryVue</span>
                 </v-toolbar-title>
             </router-link>
-
-
-            <!-- search bar -->
-            <v-spacer></v-spacer>
-            <!-- Search Bar -->
-            <v-text-field v-model="searchQuery" placeholder="Search..." prepend-inner-icon="mdi-magnify"
-                class="pa-4"></v-text-field>
-
+            
             <!-- cart -->
             <v-spacer></v-spacer>
             <v-btn color="yellow" to="/cart">

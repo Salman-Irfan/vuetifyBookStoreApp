@@ -2,10 +2,10 @@
     <v-container fluid>
         <v-row>
             <!-- Left Half - Image -->
-            <AuthImageComponent/>
+            <AuthImageComponent />
 
             <!-- Right Half - Form -->
-            <v-col cols="6" class="mt-4" >
+            <v-col cols="6" class="mt-4">
                 <v-container fluid style="background-color: black;" class="mt-8">
                     <h1 class="text-center" style="color: yellow;">Sign Up Form</h1>
                     <v-row justify="center">
@@ -13,18 +13,18 @@
                             <!-- Form starts -->
                             <v-form @submit.prevent="signup" ref="form" lazy-validation>
                                 <!-- Name -->
-                                <v-text-field v-model="name" label="Name" :rules="nameRules" required
+                                <v-text-field variant="outlined" v-model="name" label="Name" :rules="nameRules" required
                                     style="color: yellow;"></v-text-field>
                                 <!-- Email -->
-                                <v-text-field v-model="email" label="Email" :rules="emailRules" required
+                                <v-text-field variant="outlined" v-model="email" label="Email" :rules="emailRules" required
                                     style="color: yellow;"></v-text-field>
                                 <!-- Password -->
-                                <v-text-field v-model="password" label="Password" :rules="passwordRules" required
-                                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                <v-text-field variant="outlined" v-model="password" label="Password" :rules="passwordRules"
+                                    required :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                     :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword"
                                     style="color: yellow;"></v-text-field>
                                 <!-- Confirm Password -->
-                                <v-text-field v-model="confirmPassword" label="Confirm Password"
+                                <v-text-field variant="outlined" v-model="confirmPassword" label="Confirm Password"
                                     :rules="confirmPasswordRules" required
                                     :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                     :type="showConfirmPassword ? 'text' : 'password'"
