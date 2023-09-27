@@ -80,64 +80,64 @@
   </v-layout>
 </template>
 
-<script>
-import GetAllProducts from "../services/apiIntegrations/productsApis/getAllProducts"
-export default {
-  name: "HomeView",
-  data: () => ({
-    show: false,
-    products: [],
-    searchText: "",
-  }),
-  // computed
-  computed: {
-    filteredProducts() {
-      // Filter products based on searchText (title or description)
-      return this.products.filter((product) =>
-        product.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        product.description.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    },
-    groupedProducts() {
-      // Group filteredProducts into arrays of 4 products each
-      const grouped = [];
-      for (let i = 0; i <= this.filteredProducts.length; i += 4) {
-        grouped.push(this.filteredProducts.slice(i, i + 4));
-      }
-      return grouped;
-    },
-    ratingStars() {
-      return (rating) => {
-        const starsHTML = [];
-        const fullStars = Math.floor(rating);
-        const halfStar = rating - fullStars >= 0.5;
-
-        for (let i = 0; i < fullStars; i++) {
-          starsHTML.push('<i class="mdi mdi-star yellow-star"></i>');
+  <script>
+  import GetAllProducts from "../services/apiIntegrations/productsApis/getAllProducts"
+  export default {
+    name: "HomeView",
+    data: () => ({
+      show: false,
+      products: [],
+      searchText: "",
+    }),
+    // computed
+    computed: {
+      filteredProducts() {
+        // Filter products based on searchText (title or description)
+        return this.products.filter((product) =>
+          product.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          product.description.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+      },
+      groupedProducts() {
+        // Group filteredProducts into arrays of 4 products each
+        const grouped = [];
+        for (let i = 0; i <= this.filteredProducts.length; i += 4) {
+          grouped.push(this.filteredProducts.slice(i, i + 4));
         }
+        return grouped;
+      },
+      ratingStars() {
+        return (rating) => {
+          const starsHTML = [];
+          const fullStars = Math.floor(rating);
+          const halfStar = rating - fullStars >= 0.5;
 
-        if (halfStar) {
-          starsHTML.push('<i class="mdi mdi-star-half yellow-star"></i>');
-        }
+          for (let i = 0; i < fullStars; i++) {
+            starsHTML.push('<i class="mdi mdi-star yellow-star"></i>');
+          }
 
-        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+          if (halfStar) {
+            starsHTML.push('<i class="mdi mdi-star-half yellow-star"></i>');
+          }
 
-        for (let i = 0; i < emptyStars; i++) {
-          starsHTML.push('<i class="mdi mdi-star-outline yellow-star"></i>');
-        }
+          const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
-        return starsHTML.join('');
-      };
+          for (let i = 0; i < emptyStars; i++) {
+            starsHTML.push('<i class="mdi mdi-star-outline yellow-star"></i>');
+          }
+
+          return starsHTML.join('');
+        };
+      },
+
     },
-
-  },
-  async created() {
-    const response = await GetAllProducts.getAllProducts();
-    this.products = response.products; // Access the 'products' property
-    console.log(this.products);
-  },
-};
-</script>
+    async created() {
+      const response = await GetAllProducts.getAllProducts();
+      this.products = response.products; // Access the 'products' property
+      console.log(this.products);
+    },
+  };
+  </script>
 <style scoped>
 .v-card-text {
   padding: 8px;

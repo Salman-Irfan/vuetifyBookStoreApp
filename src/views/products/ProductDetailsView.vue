@@ -1,52 +1,65 @@
 <template>
-    <div>
+    <v-container>
         <h1 class="text-center my-4 px-4">Product Details</h1>
-        <div class="container mt-4 py-4 px-4">
-            <!-- Display product details here -->
-            <div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Discount Percentage</th>
-                            <th>Rating</th>
-                            <th>Stock</th>
-                            <th>Brand</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ product.id }}</td>
-                            <td>{{ product.title }}</td>
-                            <td>{{ product.description }}</td>
-                            <td>${{ product.price }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>{{ product.discountPercentage }}%</td>
-                            <td>{{ product.rating }}%</td>
-                            <td>{{ product.stock }}%</td>
-                            <td>{{ product.brand }}%</td>
-                            <td>{{ product.category }}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h3>Images</h3>
+        <v-row>
+            <v-col cols="12" md="6">
+                <!-- Product Images -->
                 <div class="text-center">
                     <div v-if="product.images && product.images.length > 0" v-for="(image, index) in product.images"
                         :key="index" class="images">
-                        <img :src="image" alt="Product Image" width="250" height="200" />
+                        <v-img :src="image" alt="Product Image" width="250" height="200" />
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </v-col>
+            <v-col cols="12" md="6">
+                <!-- Product Metadata -->
+                <div>
+                    <h3>Product Information</h3>
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>ID: {{ product.id }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Title: {{ product.title }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Category: {{ product.category }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Description: {{ product.description }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Rating: {{ product.rating }}%</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Price: ${{ product.price }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Stock: {{ product.stock }}%</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </div>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
+import GetSingleProducts from '../../services/apiIntegrations/productsApis/getSingleProduct';
 export default {
     name: "ProductDetailsView",
     data() {
@@ -54,20 +67,14 @@ export default {
             product: {}, // Initialize an empty object to store the product details
         };
     },
-    mounted() {
-        // Get the product ID from the route parameters
+    async mounted() {
         const productId = this.$route.params.id;
-
-        // Fetch product details from the API using the product ID
-        fetch(`https://dummyjson.com/products/${productId}`)
-            .then((res) => res.json())
-            .then((data) => {
-                // Assign the product details to the data property
-                this.product = data;
-            })
-            .catch((error) => {
-                console.error("Error fetching product details:", error);
-            });
+        try {
+            const productData = await GetSingleProducts.getSingleProduct(productId);
+            this.product = productData;
+        } catch (error) {
+            console.error("Error fetching product details:", error);
+        }
     },
 };
 </script>
