@@ -21,11 +21,14 @@
             <v-row>
               <!-- to loop through products -->
               <v-col v-for="product in productGroup" :key="product.id" cols="12" md="3" sm="6">
+                <!-- dynamic route to that product detail -->
                 <v-card class="mx-2 custom-card">
                   <!-- product thumbnail -->
-                  <v-img :src="product.thumbnail" height="200px" cover></v-img>
-                  <!-- title -->
-                  <v-card-title>title: {{ product.title }}</v-card-title>
+                  <router-link class="tdNone" :to="'/products/details/' + product.id">
+                    <v-img :src="product.thumbnail" height="200px" cover></v-img>
+                    <!-- title -->
+                    <v-card-title>title: {{ product.title }}</v-card-title>
+                  </router-link>
                   <!-- price, ratings, and stars -->
                   <v-card-subtitle class="flex-container">
                     <div class="left-content">
@@ -44,14 +47,16 @@
                     <!-- pending to add cart page route -->
                     <router-link to="/login">
                       <!-- cart -->
-                      <v-btn color="yellow-lighten-1" variant="text" prepend-icon="mdi-cart"> Add to Cart </v-btn>
+                      <router-link class="tdNone" :to="'/products/addcart/' + product.id">
+                        <v-btn color="yellow-lighten-1" variant="text" prepend-icon="mdi-cart"> Add to Cart </v-btn>
+                      </router-link>
                     </router-link>
                     <!-- description -->
                     <v-spacer></v-spacer>
-                    <v-card-subtitle class="yellow-star">Description
-                      <v-btn color="yellow-lighten-2" :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                        @click="show = !show"></v-btn>
-                    </v-card-subtitle>
+                    <v-btn color="yellow-lighten-2" @click="show = !show" >Description
+                      <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                        ></v-btn>
+                    </v-btn>
                   </v-card-actions>
                   <v-expand-transition>
                     <!-- show = true show description -->
@@ -63,6 +68,7 @@
                     </v-container>
                   </v-expand-transition>
                 </v-card>
+
               </v-col>
             </v-row>
           </v-carousel-item>
@@ -95,7 +101,7 @@ export default {
     groupedProducts() {
       // Group filteredProducts into arrays of 4 products each
       const grouped = [];
-      for (let i = 0; i < this.filteredProducts.length; i += 4) {
+      for (let i = 0; i <= this.filteredProducts.length; i += 4) {
         grouped.push(this.filteredProducts.slice(i, i + 4));
       }
       return grouped;
@@ -157,7 +163,9 @@ export default {
   /* You can adjust this value as needed */
   margin-right: 20px;
 }
-
+.tdNone{
+  text-decoration: none;
+}
 .red-text {
   color: #FF0C49;
 }
@@ -167,7 +175,7 @@ export default {
 }
 
 .yellow-star {
-  color: yellow;
+  color: #ffea29;
   font-size: 18px;
   /* Adjust the size of the stars */
 }
