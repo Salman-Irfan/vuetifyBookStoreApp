@@ -39,6 +39,7 @@
 
 <script>
 import AuthImageComponent from "../../components/authPageImage/AuthImageComponent"
+import LoginUserApi from "../../services/apiIntegrations/userApis/loginUserApi"
 export default {
     name: "LoginView",
     components: {
@@ -61,14 +62,24 @@ export default {
         };
     },
     methods: {
-        login() {
+        async login() {
             // Add signup logic here
             if (this.$refs.form.validate()) {
-                // Form is valid, you can send the signup data to your backend API or perform other actions
-                console.log("Login data:", {
-                    email: this.email,
-                    password: this.password,
-                });
+                // Form is valid, you can send the login data to your backend API
+                try {
+                    const response = await LoginUserApi.loginUser({
+                        email: this.email,
+                        password: this.password
+                    })
+                    if(response.message === "Login Successfull"){
+                        // save token to local storage
+                        localStorage.setItem("token", response.token);
+                        // redirect to home page
+                        this.$router.push("/")
+                    }
+                } catch (error) {
+                    throw error
+                }
             }
         },
     },
