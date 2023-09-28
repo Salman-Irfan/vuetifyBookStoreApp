@@ -31,14 +31,11 @@
                                     @click:append="showConfirmPassword = !showConfirmPassword"
                                     style="color: yellow;"></v-text-field>
                                 <!-- Submit button -->
-                                <v-btn type="submit" block class="mt-4" style="background-color: yellow; color: black;">
-                                    Sign Up
-                                </v-btn>
+                                <v-btn type="submit" block class="mt-4" style="background-color: yellow; color: black;">Sign
+                                    Up</v-btn>
                             </v-form>
                             <!-- Error message for invalid input -->
-                            <v-alert v-if="signupError" type="error" class="mt-2">
-                                Sign up failed.
-                            </v-alert>
+                            <v-alert v-if="signupError" type="error" class="mt-2">Sign up failed.</v-alert>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -47,14 +44,14 @@
     </v-container>
 </template>
 
-
-
 <script>
-import AuthImageComponent from "../../components/authPageImage/AuthImageComponent"
+import AuthImageComponent from "../../components/authPageImage/AuthImageComponent";
+import RegisterUserApi from "../../services/apiIntegrations/userApis/registerUserApi"; // Import your API class
+
 export default {
     name: "SignupView",
     components: {
-        AuthImageComponent
+        AuthImageComponent,
     },
     data() {
         return {
@@ -64,9 +61,7 @@ export default {
             confirmPassword: "",
             showPassword: false,
             showConfirmPassword: false,
-            nameRules: [
-                (v) => !!v || "Name is required",
-            ],
+            nameRules: [(v) => !!v || "Name is required"],
             emailRules: [
                 (v) => !!v || "Email is required",
                 (v) => /.+@.+\..+/.test(v) || "Valid email is required",
@@ -83,16 +78,30 @@ export default {
         };
     },
     methods: {
-        signup() {
-            // Add signup logic here
+        async signup() {
             if (this.$refs.form.validate()) {
-                // Form is valid, you can send the signup data to your backend API or perform other actions
-                console.log("Signup data:", {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password,
-                    confirmPassword: this.confirmPassword,
-                });
+                try {
+                    // Call the registerUser method from your API class
+                    const response = await RegisterUserApi.registerUser({
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        confirm_password: this.confirmPassword,
+                    });
+                    // Check if the signup was successful
+                    if (response.message === "Registeration Successfull") {
+                        // redirect to login page
+                        this.$router.push("/login");
+                    } else {
+                        // Signup failed
+                        this.signupError = true;
+                        console.error("Signup failed:", response.message);
+                    }
+                } catch (error) {
+                    // Handle any errors that may occur during the request
+                    this.signupError = true;
+                    console.error("Error during signup:", error);
+                }
             }
         },
     },
